@@ -30,7 +30,19 @@ class NameLoadTest {
         assertThatThrownBy(() -> nameLoad.parse(strings))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageMatching("^.+")
+                .hasMessageContaining(strings[0])
                 .hasMessageContaining("dots not contain the symbol");
+    }
+
+    @Test
+    void checkNameStartsWith() {
+        NameLoad nameLoad = new NameLoad();
+        String[] strings = new String[]{"=key", "value"};
+        assertThatThrownBy(() -> nameLoad.parse(strings))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageMatching("^.+")
+                .hasMessageContaining(strings[0])
+                .hasMessageContaining("does not contain a key");
     }
 
     @Test

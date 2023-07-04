@@ -28,6 +28,11 @@ public class NameLoad {
             throw new IllegalArgumentException(
                     "this name %s dots not contain the symbol '='".formatted(name));
         }
+        if (name.startsWith("=")) {
+            throw new IllegalArgumentException(
+                    "this name: %s does not contain a key".formatted(name)
+            );
+        }
         if (name.indexOf("=") == name.length() - 1) {
             throw new IllegalArgumentException(
                     "this name: %s does not contain a value".formatted(name)
