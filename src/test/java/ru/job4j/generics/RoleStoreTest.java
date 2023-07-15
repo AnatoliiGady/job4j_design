@@ -58,6 +58,7 @@ class RoleStoreTest {
         assertThat(result).isNull();
 
     }
+
     @Test
     void whenNoDeleteUserThenUsernameIsPetr() {
         RoleStore store = new RoleStore();
@@ -77,7 +78,7 @@ class RoleStoreTest {
 
     @Test
     void whenReplaceNotOkThenFalse() {
-        RoleStore store = new RoleStore();;
+        RoleStore store = new RoleStore();
         store.add(new Role("1", "Petr"));
         boolean result = store.replace("10", new Role("10", "Maxim"));
         assertThat(result).isFalse();
