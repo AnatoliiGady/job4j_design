@@ -55,8 +55,6 @@ public class RevertLinked<T> implements Iterable<T> {
                 return value;
             }
         };
-
-
     }
 
     private static class Note<T> {
