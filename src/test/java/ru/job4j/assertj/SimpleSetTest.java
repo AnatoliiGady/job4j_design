@@ -8,7 +8,7 @@ class SimpleSetTest {
 
     @Test
     void when4AddAndAddFirstThenFalse() {
-        SimpleSet set= new SimpleSet();
+        SimpleSet set = new SimpleSet();
         set.add("first");
         set.add("second");
         set.add("third");
