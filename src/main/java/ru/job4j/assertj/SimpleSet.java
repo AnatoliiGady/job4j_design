@@ -30,6 +30,7 @@ public class SimpleSet {
     }
 
     private void grow() {
-        container = Arrays.copyOf(container, container.length * 2);
+        container = Arrays.
+                copyOf(container, container.length * 2);
     }
 }
