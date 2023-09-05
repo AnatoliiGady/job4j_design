@@ -69,7 +69,10 @@ public class NonCollisionMap<K, V> implements SimpleMap<K, V> {
     public boolean remove(K key) {
         int index = getIndex(key);
         boolean result = get(key) != null;
-        if (result && Objects.equals(table[index].key, key)) {
+        if ((result && table[index] != null
+                && table[index].key != null
+                && table[index].key.hashCode() == key.hashCode())
+                || table[index] != null && Objects.equals(table[index].key, key)) {
             table[index] = null;
             modCount++;
             count--;
