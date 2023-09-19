@@ -55,11 +55,7 @@ public class NonCollisionMap<K, V> implements SimpleMap<K, V> {
     @Override
     public V get(K key) {
         int index = getIndex(key);
-        V result = null;
-        if (isValid(key)) {
-            result = table[index].value;
-        }
-        return result;
+        return isValid(key) ? table[index].value : null;
     }
 
     @Override
