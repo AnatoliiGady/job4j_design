@@ -11,12 +11,16 @@ public class LogFilter {
     public LogFilter(String file) {
         this.file = file;
     }
+
     public List<String> filter() {
         List<String> rsl = new ArrayList<>();
-        try (BufferedReader in = new BufferedReader((new FileReader(file)))) {
-            in.lines().map(s -> s.split(" "))
-                    .filter(strings -> strings[strings.length - 2].contains("404"))
-                    .map(strings ->  String.join(" ", strings)).forEach(rsl::add);
+        try (BufferedReader in = new BufferedReader(new FileReader(file))) {
+            for (String line = in.readLine(); line != null; line = in.readLine()) {
+                String[] arrays = line.split(" ");
+                if ("404".equals(arrays[arrays.length - 2])) {
+                    rsl.add(line);
+                }
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
