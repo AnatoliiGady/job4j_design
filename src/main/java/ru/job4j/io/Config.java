@@ -58,6 +58,5 @@ public class Config {
         for (Map.Entry<String, String> entry : config.values.entrySet()) {
             System.out.println("Ключ " + entry.getKey() + " значение " + entry.getValue());
         }
-        //System.out.println(config);
     }
 }
