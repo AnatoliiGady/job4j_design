@@ -8,18 +8,18 @@ public class Analysis {
         String line;
 
         try (BufferedReader reader = new BufferedReader(new FileReader(source));
-             FileOutputStream outputStream = new FileOutputStream(target)) {
+             FileWriter fileWriter = new FileWriter(target)) {
             while ((line = reader.readLine()) != null) {
                 String[] words = line.split(" ", 2);
-                if (serverOn && (words[0].equals("400") || words[0].equals("500"))) {
-                    outputStream.write(words[1].getBytes());
-                    outputStream.write(";".getBytes());
+                if (serverOn && ("400".equals(words[0]) || "500".equals(words[0]))) {
+                    fileWriter.write(words[1]);
+                    fileWriter.write(";");
                     serverOn = false;
                 }
                 if (!serverOn && (words[0].equals("200") || words[0].equals("300"))) {
-                    outputStream.write(words[1].getBytes());
-                    outputStream.write(";".getBytes());
-                    outputStream.write(System.lineSeparator().getBytes());
+                    fileWriter.write(words[1]);
+                    fileWriter.write(";");
+                    fileWriter.write(System.lineSeparator());
                     serverOn = true;
                 }
             }
