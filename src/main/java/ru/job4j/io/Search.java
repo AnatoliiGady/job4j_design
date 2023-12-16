@@ -7,6 +7,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.function.Predicate;
+import java.util.regex.Pattern;
 
 public class Search {
     public static void main(String[] args) throws IOException {
@@ -27,12 +28,15 @@ public class Search {
             throw new IllegalArgumentException("incorrect number of arguments");
         }
         File file = new File(args[0]);
+        Pattern pattern = Pattern.compile("^.[a-zA-Z]+");
         if (!file.exists()) {
             throw new IllegalArgumentException("root folder should not be null");
         }
         if (!file.isDirectory()) {
             throw new IllegalArgumentException("search extension is empty, enter file extension");
         }
-
+        if (!args[1].matches("^.[a-zA-Z]+")) {
+            throw new IllegalArgumentException("the second argument must begin with \".\" and have more characters");
+        }
     }
 }
