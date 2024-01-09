@@ -49,7 +49,7 @@ public class Car {
                 + ", released=" + released
                 + ", model='" + model + '\''
                 + ", number=" + number
-                + ", statuses=" + Arrays.toString(statuses) +
-                '}';
+                + ", statuses=" + Arrays.toString(statuses)
+                + '}';
     }
 }
