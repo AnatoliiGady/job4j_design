@@ -30,7 +30,7 @@ public class Car {
                 "{"
                         + "\"jeep\":true,"
                         + "\"released\":2023,"
-                        + "\"model\":Lexus,"
+                        + "\"model\":\"Lexus\","
                         + "\"number\":"
                         + "{"
                         + "\"number\":\"C292KM\""
@@ -42,6 +42,7 @@ public class Car {
         final Car carMod = gson.fromJson(carJson, Car.class);
         System.out.println(carMod);
     }
+
     @Override
     public String toString() {
         return "Car{"
