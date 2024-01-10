@@ -2,7 +2,7 @@
 <car jeep="true" released="2023" model="Lexus">
     <number number="C292KM"/>
     <statuses>
-        <status>"engine capacity 4,7</status>
-        <status>"wheel size 18</status>
+        <status>engine capacity 4,7</status>
+        <status>wheel size 18</status>
     </statuses>
 </car>
