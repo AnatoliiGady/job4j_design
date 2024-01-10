@@ -2,8 +2,12 @@ package ru.job4j.serialization.json;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class Car {
     private final boolean jeep;
@@ -20,27 +24,24 @@ public class Car {
         this.statuses = statuses;
     }
 
-    public static void main(String[] args) {
-        Car car = new Car(true, 2023, "Lexus", new Number("C292KM"),
-                new String[]{"engine capacity 4,7", "wheel size 18"});
-        final Gson gson = new GsonBuilder().create();
-        System.out.println(gson.toJson(car));
+    public boolean getJeep() {
+        return jeep;
+    }
 
-        final String carJson =
-                "{"
-                        + "\"jeep\":true,"
-                        + "\"released\":2023,"
-                        + "\"model\":\"Lexus\","
-                        + "\"number\":"
-                        + "{"
-                        + "\"number\":\"C292KM\""
-                        + "},"
-                        + "\"statuses\":"
-                        + "[\"engine capacity 4,7\",\"wheel size 18\"]"
-                        + "}";
+    public int getReleased() {
+        return released;
+    }
 
-        final Car carMod = gson.fromJson(carJson, Car.class);
-        System.out.println(carMod);
+    public String getModel() {
+        return model;
+    }
+
+    public Number getNumber() {
+        return number;
+    }
+
+    public String[] getStatuses() {
+        return statuses;
     }
 
     @Override
@@ -52,5 +53,23 @@ public class Car {
                 + ", number=" + number
                 + ", statuses=" + Arrays.toString(statuses)
                 + '}';
+    }
+
+    public static void main(String[] args) {
+        JSONObject jsonNumber = new JSONObject("{\"number\":\"С570ЕР\"}");
+        List<String> list = new ArrayList<>();
+        list.add("engine capacity 5");
+        list.add("wheel size 20");
+        JSONArray jsonStatuses = new JSONArray(list);
+        Car car = new Car(true, 2023, "Lexus", new Number("C292KM"),
+                new String[]{"engine capacity 4,7", "wheel size 18"});
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("jeep", car.getJeep());
+        jsonObject.put("released", car.getReleased());
+        jsonObject.put("model", car.getModel());
+        jsonObject.put("number", jsonNumber);
+        jsonObject.put("statuses", jsonStatuses);
+        System.out.println(jsonObject);
+        System.out.println(new JSONObject(car));
     }
 }
