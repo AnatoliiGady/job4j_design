@@ -1,5 +1,6 @@
 package ru.job4j.io;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,28 +18,34 @@ public class ArgsName {
         if (args.length == 0) {
             throw new IllegalArgumentException("Arguments not passed to program");
         }
+        for (String arg : args) {
+            validationArguments(arg);
+        }
         ArgsName names = new ArgsName();
         names.parse(args);
         return names;
     }
 
     public void parse(String[] args) {
-        for (String line : args) {
-            if (!line.contains("=")) {
-                throw new IllegalArgumentException(String.format("Error: This argument '%s' does not contain an equal sign", args[1]));
-            }
-            if (!Character.toString(line.charAt(0)).equals("-")) {
-                throw new IllegalArgumentException(String.format("Error: This argument '%s' does not start with a '-' character", args[1]));
-            }
-            String key = line.substring(line.indexOf("-") + 1, line.indexOf("="));
-            String value = line.substring(line.indexOf("=") + 1);
-            if (key.isBlank()) {
-                throw new IllegalArgumentException(String.format("Error: This argument '%s' does not contain a key", args[1]));
-            }
-            if (value.isBlank()) {
-                throw new IllegalArgumentException(String.format("Error: This argument '%s' does not contain a value", args[1]));
-            }
-            values.put(key, value);
+        Arrays.stream(args)
+                .map(s -> s.substring(1))
+                .map(s -> s.split("=", 2))
+                .forEach(arr -> values.put(arr[0], arr[1]));
+    }
+
+    private static void validationArguments(String args) {
+        if (!args.contains("=")) {
+            throw new IllegalArgumentException(String.format("Error: This argument '%s' does not contain an equal sign", args));
+        }
+        if (!Character.toString(args.charAt(0)).equals("-")) {
+            throw new IllegalArgumentException(String.format("Error: This argument '%s' does not start with a '-' character", args));
+        }
+        String[] keyAndValueArr = args.substring(1).split("=", 2);
+        if (keyAndValueArr[0].isEmpty()) {
+            throw new IllegalArgumentException(String.format("Error: This argument '%s' does not contain a key", args));
+        }
+        if (keyAndValueArr[1].isEmpty()) {
+            throw new IllegalArgumentException(String.format("Error: This argument '%s' does not contain a value", args));
         }
     }
 
