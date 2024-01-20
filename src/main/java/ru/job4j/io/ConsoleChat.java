@@ -20,7 +20,6 @@ public class ConsoleChat {
         this.botAnswers = botAnswers;
     }
 
-
     public void run() {
         List<String> listAnswers = this.readPhrases();
         List<String> listLog = new ArrayList<>();
@@ -46,7 +45,6 @@ public class ConsoleChat {
             listLog.add(userAnswer);
         }
         saveLog(listLog);
-
     }
 
     private List<String> readPhrases() {
@@ -70,8 +68,6 @@ public class ConsoleChat {
         try (PrintWriter writerLog = new PrintWriter(
                 new FileWriter(path.toString(), StandardCharsets.UTF_8, true))) {
             log.forEach(writerLog::println);
-            writerLog.close();
-            writerLog.flush();
         } catch (Exception e) {
             e.printStackTrace();
         }
