@@ -12,8 +12,14 @@ insert into teens(name, gender) values ('Толя', 'М');
 insert into teens(name, gender) values ('Катя', 'Ж');
 insert into teens(name, gender) values ('Таня', 'Ж');
 
-select  t1.name, t2.name
+select t1.name, t2.name
 from teens t1
 cross join teens t2
 where t1.gender != t2.gender
+and t1.name != t2.name
 
+select t1.name, t2.name
+from teens t1
+cross join teens t2
+where t1.gender != t2.gender
+and t1.gender = 'М'
